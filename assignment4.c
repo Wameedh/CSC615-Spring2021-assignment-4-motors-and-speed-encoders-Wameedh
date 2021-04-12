@@ -44,26 +44,26 @@ int main(void) {
         */
     printf("Motor running forword!\n");
     runTheMotor(FORWARD, 100); // run the motor forward at max speed
-    printOutInfo();
+    
     delay(5000); // five seconds delay
     printf("Motor started slowing down to 15%\n");
     for (size_t i = 100; i >= 15 ; i--)
     {
         // gradually decrease speed to 15%
         runTheMotor(FORWARD, i);
-        printOutInfo();
+       
     }
     delay(3000); // three second delay
     Motor_Stop();
     printf("Motor has stoped fully!\n");
-    printOutInfo();
+    
     delay(2000); // two seconds delay
     printf("Motor started running backward and gradually increase speed to max\n");
      for (size_t i = 0; i <= 100 ; i++)
     {
         // gradually increase speed to max
         runTheMotor(BACKWARD, i);
-        printOutInfo();
+       
     }
     delay(5000); // five seconds delay
     Motor_Stop();
@@ -73,7 +73,7 @@ int main(void) {
 
     printf("Motor has stoped!\n");
     printf("End of program!\n");
-    printOutInfo();
+   
 
     return 0;
 }
@@ -81,9 +81,11 @@ int main(void) {
 
 void runTheMotor(DIR dir, UWORD speed)
 {
+    printf("Motor speed %f%", speed);
+
     if(speed > 100) // max speed is 100
         speed = 100;
-        power = speed * (4096 / 100) - 1;
+        // power = speed * (4096 / 100) - 1;
         PCA9685_SetPWM(PWMA, 0, speed * (4096 / 100) - 1);
         if(dir == FORWARD) {
             PCA9685_SetPWM(AIN1,0, 4095);
@@ -171,11 +173,11 @@ void *useSpeedSensor(void *ptr) {
     while (speedSensorThreadFlag)
     {
         // delay(1000); // print out the spped every one second
-         aSpeed = calculateAngularSpeed(readPulses(TIME_TO_MEASURE), TIME_TO_MEASURE);
-         speed = calculateSpeed(ENCODER_DIAMETER, aSpeed);
-        // printf("Power (PWM) being applied is: %f\n", power);
-        // printf("The angular speed is: %f rad/sec\n", aSpeed);
-        // printf("The linear speed is: %f cm/sec\n\n", speed);
+        double aSpeed = calculateAngularSpeed(readPulses(TIME_TO_MEASURE), TIME_TO_MEASURE);
+        double speed = calculateSpeed(ENCODER_DIAMETER, aSpeed);
+        
+        printf("The angular speed is: %f rad/sec\n", aSpeed);
+        printf("The linear speed is: %f cm/sec\n\n", speed);
     }
     return NULL;
 }
@@ -205,8 +207,8 @@ int readPulses(double time) {
     return count;
 }
 
-void printOutInfo(){
-    printf("Power (PWM) being applied is: %f\n", power);
-    printf("The angular speed is: %f rad/sec\n", aSpeed);
-    printf("The linear speed is: %f cm/sec\n\n", speed);
-}
+// void printOutInfo(){
+//     printf("Power (PWM) being applied is: %f\n", power);
+//     printf("The angular speed is: %f rad/sec\n", aSpeed);
+//     printf("The linear speed is: %f cm/sec\n\n", speed);
+// }
