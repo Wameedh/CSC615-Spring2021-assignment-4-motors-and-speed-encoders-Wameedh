@@ -67,6 +67,7 @@ int main(void) {
     printf("End of program!\n");
 
     pthread_join( sensorThread_id, NULL);
+    pthread_cancel(sensorThread_id); 
 
     return 0;
 }
@@ -165,8 +166,8 @@ void *useSpeedSensor(void *ptr) {
         delay(1000); // print out the spped every one second
         double aSpeed = calculateAngularSpeed(readPulses(TIME_TO_MEASURE), TIME_TO_MEASURE);
         double speed = calculateSpeed(ENCODER_DIAMETER, aSpeed);
-        printf("The angular speed is: %f rad/s\n", aSpeed);
-        printf("The linear speed is: %f m/s\n", speed);
+        printf("The angular speed is: %f rad/sec\n", aSpeed);
+        printf("The linear speed is: %f cm/sec\n\n", speed);
     }
     return NULL;
 }
@@ -176,14 +177,14 @@ double calculateAngularSpeed(int totalPulses, double time) {
 }
 
 double calculateSpeed(double diameter, double angularSpeed) {
-    return ((diameter / 2) / 100) * angularSpeed;
+    return (diameter / 2) * angularSpeed;
 }
 
 int readPulses(double time) {
     int count = 0;
     double start = millis();
     double end = start + (1000 * time);
-    printf("start: %f, end: %f\n", start, end);
+    // printf("start: %f, end: %f\n", start, end);
 
     while (end > millis()) {
         if(digitalRead(SPEED_SENSOR_PIN)) {
@@ -191,7 +192,7 @@ int readPulses(double time) {
             while(digitalRead(SPEED_SENSOR_PIN)){}
         }
     }
-    printf("Total count: %d\n", count);
+    // printf("Total count: %d\n", count);
 
     return count;
 }
