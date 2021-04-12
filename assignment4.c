@@ -67,7 +67,7 @@ int main(void) {
     printf("End of program!\n");
 
     pthread_join( sensorThread_id, NULL);
-    
+
     return 0;
 }
 
@@ -160,10 +160,14 @@ void PCA9685_SetPWMFreq(UWORD freq)
 
 
 void *useSpeedSensor(void *ptr) {
-    double aSpeed = calculateAngularSpeed(readPulses(TIME_TO_MEASURE), TIME_TO_MEASURE);
-    double speed = calculateSpeed(ENCODER_DIAMETER, aSpeed);
-    printf("The angular speed is: %f rad/s\n", aSpeed);
-    printf("The linear speed is: %f m/s\n", speed);
+    while (1)
+    {
+        delay(1000); // print out the spped every one second
+        double aSpeed = calculateAngularSpeed(readPulses(TIME_TO_MEASURE), TIME_TO_MEASURE);
+        double speed = calculateSpeed(ENCODER_DIAMETER, aSpeed);
+        printf("The angular speed is: %f rad/s\n", aSpeed);
+        printf("The linear speed is: %f m/s\n", speed);
+    }
     return NULL;
 }
 
