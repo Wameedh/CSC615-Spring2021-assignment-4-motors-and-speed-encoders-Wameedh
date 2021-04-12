@@ -65,4 +65,16 @@ void runTheMotor(DIR dir, UWORD speed);
 void writeI2C(UBYTE reg, UBYTE value);
 UBYTE readI2C(UBYTE reg);
 
+//reads the pulses that the speed sensor sees. It returns the pulses that were counted.
+int readPulses(double time);
+
+//calculates and returns angular speed using formula omega = (2*PI*NumberOfPulses) / (Time * PulsesPerRotation). Speed in radians per second.
+double calculateAngularSpeed(int totalPulses, double time);
+
+//calculates and returns linear speed using formula v = ωr. Speed in meters per second.
+double calculateSpeed(double diameter, double angularSpeed);
+
+//Function to be used in threads to display the speed read by the speed sensor.
+void *useSpeedSensor(void *ptr);
+
 #endif //MOTORCONTROLER_H_
