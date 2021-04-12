@@ -11,12 +11,7 @@
 *
 **************************************************************/
 #include "motorControler.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <stdint.h>
-#include <wiringPi.h>
-#include <wiringPiI2C.h>
+
 // #include "assignment4.h"
 // Pin number declarations. We're using the Broadcom chip pin numbers.
 const int buttonPin = 17; // PWM LED - Broadcom pin 17, P1 pin 11

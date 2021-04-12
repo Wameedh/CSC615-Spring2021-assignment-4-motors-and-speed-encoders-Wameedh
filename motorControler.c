@@ -13,7 +13,7 @@
 *
 **************************************************************/
 
-#include "motorControler.h"
+// #include "motorControler.h"
 
 
 void runTheMotor(DIR dir, UWORD speed)
