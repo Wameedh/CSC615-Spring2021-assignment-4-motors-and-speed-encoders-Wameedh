@@ -10,8 +10,7 @@
 * Description: This is the header file for motorControler.c file that was imported from assignment 3.
 **************************************************************/
 
-// #ifndef MOTORCONTROLER_H
-// #define MOTORCONTROLER_H
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,6 +19,8 @@
 #include <wiringPi.h>
 #include <wiringPiI2C.h>
 
+#ifndef MOTORCONTROLER_H
+#define MOTORCONTROLER_H
 
 #define HIGH    1
 #define LOW     0
@@ -54,4 +55,4 @@ void runTheMotor(DIR dir, UWORD speed);
 void writeI2C(UBYTE reg, UBYTE value);
 UBYTE readI2C(UBYTE reg);
 
-// #endif
+#endif
