@@ -55,7 +55,7 @@ int main(void) {
     Motor_Stop();
     printf("Motor has stoped fully!\n");
     delay(2000); // two seconds delay
-    printf("Motor started running backward!\n");
+    printf("Motor started running backward and gradually increase speed to max\n");
      for (size_t i = 0; i <= 100 ; i++)
     {
         // gradually increase speed to max
@@ -77,6 +77,7 @@ void runTheMotor(DIR dir, UWORD speed)
 {
     if(speed > 100) // max speed is 100
         speed = 100;
+        power = speed * (4096 / 100) - 1;
         PCA9685_SetPWM(PWMA, 0, speed * (4096 / 100) - 1);
         if(dir == FORWARD) {
             PCA9685_SetPWM(AIN1,0, 4095);
@@ -166,6 +167,7 @@ void *useSpeedSensor(void *ptr) {
         delay(1000); // print out the spped every one second
         double aSpeed = calculateAngularSpeed(readPulses(TIME_TO_MEASURE), TIME_TO_MEASURE);
         double speed = calculateSpeed(ENCODER_DIAMETER, aSpeed);
+        printf("Power (PWM) being applied is: \n", power);
         printf("The angular speed is: %f rad/sec\n", aSpeed);
         printf("The linear speed is: %f cm/sec\n\n", speed);
     }
