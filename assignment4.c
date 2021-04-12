@@ -12,11 +12,9 @@
 **************************************************************/
 #include "motorController.h"
 
-// #include "assignment4.h"
-// Pin number declarations. We're using the Broadcom chip pin numbers.
-const int buttonPin = 17; // PWM LED - Broadcom pin 17, P1 pin 11
-int fd;
+
 int main(void) {
+     pthread_t sensorThread_id;
 
   if(wiringPiSetupGpio() == -1) { 
         exit(0); // setup wiringPi failed.
@@ -29,6 +27,8 @@ int main(void) {
     writeI2C(MODE1, 0x00);
     // set the freq 
     PCA9685_SetPWMFreq(100);
+
+    pthread_create(&sensorThread_id, NULL, useSpeedSensor,NULL);
 
     printf("Press Button to start...\n");
     while (digitalRead(buttonPin) == LOW)
@@ -65,6 +65,9 @@ int main(void) {
     Motor_Stop();
     printf("Motor has stoped!\n");
     printf("End of program!\n");
+
+    pthread_join( sensorThread_id, NULL);
+    
     return 0;
 }
 
@@ -153,4 +156,38 @@ void PCA9685_SetPWMFreq(UWORD freq)
     writeI2C(MODE1, oldmode);
     delay(5);
     writeI2C(MODE1, oldmode | 0x80);  //  This sets the MODE1 register to turn on auto increment.
+}
+
+
+void *useSpeedSensor(void *ptr) {
+    double aSpeed = calculateAngularSpeed(readPulses(TIME_TO_MEASURE), TIME_TO_MEASURE);
+    double speed = calculateSpeed(ENCODER_DIAMETER, aSpeed);
+    printf("The angular speed is: %f rad/s\n", aSpeed);
+    printf("The linear speed is: %f m/s\n", speed);
+    return NULL;
+}
+
+double calculateAngularSpeed(int totalPulses, double time) {
+    return (2.0 * PI * totalPulses) / (time * PULSES_PER_ROTATION);
+}
+
+double calculateSpeed(double diameter, double angularSpeed) {
+    return ((diameter / 2) / 100) * angularSpeed;
+}
+
+int readPulses(double time) {
+    int count = 0;
+    double start = millis();
+    double end = start + (1000 * time);
+    printf("start: %f, end: %f\n", start, end);
+
+    while (end > millis()) {
+        if(digitalRead(SPEED_SENSOR_PIN)) {
+            count++;
+            while(digitalRead(SPEED_SENSOR_PIN)){}
+        }
+    }
+    printf("Total count: %d\n", count);
+
+    return count;
 }

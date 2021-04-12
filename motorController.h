@@ -19,8 +19,14 @@
 #include <stdint.h>
 #include <wiringPi.h>
 #include <wiringPiI2C.h>
+#include <pthread.h>
 
 
+#define PI                    3.14159265358979323846  //the value of pi
+#define NUMBER_OF_MOTORS      2                       //This defines the number of motors being used.
+#define PULSES_PER_ROTATION   20                      //The number of holes in the wheel encoder. The speed sensor reads each hole as a pulse.
+#define TIME_TO_MEASURE       1.0  
+#define ENCODER_DIAMETER      2.5                     //in centimeters.
 
 #define HIGH    1
 #define LOW     0
@@ -47,6 +53,10 @@ typedef enum {
     BACKWARD  ,
 } DIR;
 
+// Pin number declarations. We're using the Broadcom chip pin numbers.
+const int buttonPin = 17; // Broadcom pin# 6 GPIO17, P1 pin 11
+#define SPEED_SENSOR_PIN      27                      //pin 5(GPIO 27)
+int fd;
 
 void Motor_Stop();
 void PCA9685_SetPWM(UBYTE channel, UWORD on, UWORD off);
