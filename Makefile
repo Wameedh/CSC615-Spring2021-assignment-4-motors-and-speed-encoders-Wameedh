@@ -1,5 +1,5 @@
 
-ROOTNAME=assignment
+ROOTNAME=assignment4
 HW=4
 FOPTION=
 RUNOPTIONS=

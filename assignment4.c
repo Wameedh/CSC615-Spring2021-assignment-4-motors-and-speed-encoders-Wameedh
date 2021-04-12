@@ -12,12 +12,9 @@
 **************************************************************/
 #include "motorControler.h"
 // #include "assignment4.h"
-
-
 // Pin number declarations. We're using the Broadcom chip pin numbers.
 const int buttonPin = 17; // PWM LED - Broadcom pin 17, P1 pin 11
 int fd;
-
 int main(void) {
 
   if(wiringPiSetupGpio() == -1) { 
@@ -69,4 +66,5 @@ int main(void) {
     printf("End of program!\n");
     return 0;
 }
+
 
