@@ -62,6 +62,8 @@ int main(void) {
      for (size_t i = 0; i <= 100 ; i++)
     {
         // gradually increase speed to max
+        if((i % 10) == 0)
+            printf("Motor speed %d \n", i);
         runTheMotor(BACKWARD, i);
        
     }
@@ -81,7 +83,7 @@ int main(void) {
 
 void runTheMotor(DIR dir, UWORD speed)
 {
-    printf("Motor speed %f%", speed);
+   
 
     if(speed > 100) // max speed is 100
         speed = 100;
