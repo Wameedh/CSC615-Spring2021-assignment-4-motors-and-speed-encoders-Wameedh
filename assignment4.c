@@ -44,26 +44,26 @@ int main(void) {
         */
     printf("Motor running forword!\n");
     runTheMotor(FORWARD, 100); // run the motor forward at max speed
-    printOutInfo()
+    printOutInfo();
     delay(5000); // five seconds delay
     printf("Motor started slowing down to 15%\n");
     for (size_t i = 100; i >= 15 ; i--)
     {
         // gradually decrease speed to 15%
         runTheMotor(FORWARD, i);
-        printOutInfo()
+        printOutInfo();
     }
     delay(3000); // three second delay
     Motor_Stop();
     printf("Motor has stoped fully!\n");
-    printOutInfo()
+    printOutInfo();
     delay(2000); // two seconds delay
     printf("Motor started running backward and gradually increase speed to max\n");
      for (size_t i = 0; i <= 100 ; i++)
     {
         // gradually increase speed to max
         runTheMotor(BACKWARD, i);
-        printOutInfo()
+        printOutInfo();
     }
     delay(5000); // five seconds delay
     Motor_Stop();
@@ -73,7 +73,7 @@ int main(void) {
 
     printf("Motor has stoped!\n");
     printf("End of program!\n");
-    printOutInfo()
+    printOutInfo();
 
     return 0;
 }
