@@ -61,6 +61,8 @@ typedef enum {
 int speedSensorThreadFlag = 1;
 int fd;
 volatile double power = 0.0;
+volatile double aSpeed = 0.0;
+volatile double speed = 0.0;
 
 void Motor_Stop();
 void PCA9685_SetPWM(UBYTE channel, UWORD on, UWORD off);

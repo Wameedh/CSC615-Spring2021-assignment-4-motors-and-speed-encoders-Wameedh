@@ -44,31 +44,36 @@ int main(void) {
         */
     printf("Motor running forword!\n");
     runTheMotor(FORWARD, 100); // run the motor forward at max speed
+    printOutInfo()
     delay(5000); // five seconds delay
     printf("Motor started slowing down to 15%\n");
     for (size_t i = 100; i >= 15 ; i--)
     {
         // gradually decrease speed to 15%
         runTheMotor(FORWARD, i);
+        printOutInfo()
     }
     delay(3000); // three second delay
     Motor_Stop();
     printf("Motor has stoped fully!\n");
+    printOutInfo()
     delay(2000); // two seconds delay
     printf("Motor started running backward and gradually increase speed to max\n");
      for (size_t i = 0; i <= 100 ; i++)
     {
         // gradually increase speed to max
         runTheMotor(BACKWARD, i);
+        printOutInfo()
     }
     delay(5000); // five seconds delay
     Motor_Stop();
-   
+    
     speedSensorThreadFlag = 0;
     pthread_join( sensorThread_id, NULL);
 
     printf("Motor has stoped!\n");
     printf("End of program!\n");
+    printOutInfo()
 
     return 0;
 }
@@ -165,12 +170,12 @@ void PCA9685_SetPWMFreq(UWORD freq)
 void *useSpeedSensor(void *ptr) {
     while (speedSensorThreadFlag)
     {
-        delay(1000); // print out the spped every one second
+        // delay(1000); // print out the spped every one second
         double aSpeed = calculateAngularSpeed(readPulses(TIME_TO_MEASURE), TIME_TO_MEASURE);
         double speed = calculateSpeed(ENCODER_DIAMETER, aSpeed);
-        printf("Power (PWM) being applied is: %f\n", power);
-        printf("The angular speed is: %f rad/sec\n", aSpeed);
-        printf("The linear speed is: %f cm/sec\n\n", speed);
+        // printf("Power (PWM) being applied is: %f\n", power);
+        // printf("The angular speed is: %f rad/sec\n", aSpeed);
+        // printf("The linear speed is: %f cm/sec\n\n", speed);
     }
     return NULL;
 }
@@ -198,4 +203,10 @@ int readPulses(double time) {
     // printf("Total count: %d\n", count);
 
     return count;
+}
+
+void printOutInfo(){
+    printf("Power (PWM) being applied is: %f\n", power);
+    printf("The angular speed is: %f rad/sec\n", aSpeed);
+    printf("The linear speed is: %f cm/sec\n\n", speed);
 }
