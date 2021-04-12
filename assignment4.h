@@ -12,5 +12,4 @@
 **************************************************************/
 
 #include <pthread.h>
-#include <wiringPi.h>
 #include <wiringPiSPI.h>

@@ -18,8 +18,6 @@
 #include <math.h>
 #include <stdint.h>
 
-#include <pthread.h>
-#include <wiringPiSPI.h>
 
 #define HIGH    1
 #define LOW     0
