@@ -45,13 +45,13 @@ int main(void) {
     printf("Motor running forword!\n");
     runTheMotor(FORWARD, 100); // run the motor forward at max speed
     delay(5000); // five seconds delay
-    printf("Motor started slowing down!\n");
+    printf("Motor started slowing down to 15%\n");
     for (size_t i = 100; i >= 15 ; i--)
     {
         // gradually decrease speed to 15%
         runTheMotor(FORWARD, i);
     }
-    delay(1000); // one second delay
+    delay(3000); // three second delay
     Motor_Stop();
     printf("Motor has stoped fully!\n");
     delay(2000); // two seconds delay
@@ -161,7 +161,7 @@ void PCA9685_SetPWMFreq(UWORD freq)
 
 
 void *useSpeedSensor(void *ptr) {
-    while (1)
+    while (speedSensorThreadFlag)
     {
         delay(1000); // print out the spped every one second
         double aSpeed = calculateAngularSpeed(readPulses(TIME_TO_MEASURE), TIME_TO_MEASURE);
