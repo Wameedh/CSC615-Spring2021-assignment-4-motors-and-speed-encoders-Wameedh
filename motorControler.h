@@ -15,10 +15,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <wiringPi.h>
-#include <wiringPiI2C.h>
 #include <math.h>
 #include <stdint.h>
+#include <wiringPi.h>
+#include <wiringPiI2C.h>
 
 
 #define HIGH    1

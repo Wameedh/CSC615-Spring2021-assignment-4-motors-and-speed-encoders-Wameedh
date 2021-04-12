@@ -5,7 +5,7 @@ FOPTION=
 RUNOPTIONS=
 CC=gcc
 CFLAGS= -g -I.
-LIBS = -lwiringPi -lm
+LIBS = -lwiringPi -lm -lpthread
 DEPS = 
 OBJ = $(ROOTNAME)$(HW)$(FOPTION).o
 

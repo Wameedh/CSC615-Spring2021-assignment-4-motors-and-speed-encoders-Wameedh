@@ -18,7 +18,7 @@
 const int buttonPin = 17; // PWM LED - Broadcom pin 17, P1 pin 11
 int fd;
 
-int main() {
+int main(void) {
 
   if(wiringPiSetupGpio() == -1) { 
         exit(0); // setup wiringPi failed.
@@ -69,3 +69,4 @@ int main() {
     printf("End of program!\n");
     return 0;
 }
+
