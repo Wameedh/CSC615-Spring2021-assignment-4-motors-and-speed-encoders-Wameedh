@@ -171,8 +171,8 @@ void *useSpeedSensor(void *ptr) {
     while (speedSensorThreadFlag)
     {
         // delay(1000); // print out the spped every one second
-        double aSpeed = calculateAngularSpeed(readPulses(TIME_TO_MEASURE), TIME_TO_MEASURE);
-        double speed = calculateSpeed(ENCODER_DIAMETER, aSpeed);
+         aSpeed = calculateAngularSpeed(readPulses(TIME_TO_MEASURE), TIME_TO_MEASURE);
+         speed = calculateSpeed(ENCODER_DIAMETER, aSpeed);
         // printf("Power (PWM) being applied is: %f\n", power);
         // printf("The angular speed is: %f rad/sec\n", aSpeed);
         // printf("The linear speed is: %f cm/sec\n\n", speed);
