@@ -10,6 +10,10 @@
 * Description: 
 *
 **************************************************************/
+#ifndef ASSIGNMENT4_H
+#define ASSIGNMENT4_H
 
-#include <pthread.h>
-#include <wiringPiSPI.h>
+// #include <pthread.h>
+// #include <wiringPiSPI.h>
+
+#endif

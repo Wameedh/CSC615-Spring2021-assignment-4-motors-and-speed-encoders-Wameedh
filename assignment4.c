@@ -11,7 +11,7 @@
 *
 **************************************************************/
 #include "motorControler.h"
-#include "assignment4.h"
+// #include "assignment4.h"
 
 
 // Pin number declarations. We're using the Broadcom chip pin numbers.
