@@ -61,13 +61,14 @@ int main(void) {
         // gradually increase speed to max
         runTheMotor(BACKWARD, i);
     }
-    delay(5000); delay(5000); // five seconds delay
+    delay(5000); // five seconds delay
     Motor_Stop();
-    printf("Motor has stoped!\n");
-    printf("End of program!\n");
+   
     speedSensorThreadFlag = 0;
     pthread_join( sensorThread_id, NULL);
-    // pthread_cancel(sensorThread_id); 
+
+    printf("Motor has stoped!\n");
+    printf("End of program!\n");
 
     return 0;
 }
@@ -167,7 +168,7 @@ void *useSpeedSensor(void *ptr) {
         delay(1000); // print out the spped every one second
         double aSpeed = calculateAngularSpeed(readPulses(TIME_TO_MEASURE), TIME_TO_MEASURE);
         double speed = calculateSpeed(ENCODER_DIAMETER, aSpeed);
-        printf("Power (PWM) being applied is: \n", power);
+        printf("Power (PWM) being applied is: %f\n", power);
         printf("The angular speed is: %f rad/sec\n", aSpeed);
         printf("The linear speed is: %f cm/sec\n\n", speed);
     }
