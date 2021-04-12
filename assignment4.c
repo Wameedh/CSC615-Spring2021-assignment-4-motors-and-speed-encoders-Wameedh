@@ -20,7 +20,7 @@ int main(void) {
         exit(0); // setup wiringPi failed.
     }
 
-    pinMode(buttonPin, INPUT);
+    pinMode(BUTTON_PIN, INPUT);
     //Get the fd
     fd = wiringPiI2CSetup(0x40);
     // write 0 to the fd
@@ -31,7 +31,7 @@ int main(void) {
     pthread_create(&sensorThread_id, NULL, useSpeedSensor,NULL);
 
     printf("Press Button to start...\n");
-    while (digitalRead(buttonPin) == LOW)
+    while (digitalRead(BUTTON_PIN) == LOW)
     {
     //  The program is listening for the button to be pressed,
     //  then it would exit this while loop and execute the rest of the instructions.
@@ -65,9 +65,9 @@ int main(void) {
     Motor_Stop();
     printf("Motor has stoped!\n");
     printf("End of program!\n");
-
+    speedSensorThreadFlag = 0;
     pthread_join( sensorThread_id, NULL);
-    pthread_cancel(sensorThread_id); 
+    // pthread_cancel(sensorThread_id); 
 
     return 0;
 }
