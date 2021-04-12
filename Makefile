@@ -4,9 +4,9 @@ HW=4
 FOPTION=
 RUNOPTIONS=
 CC=gcc
-CFLAGS= -g -I.
+CFLAGS= -g -Wall -I.
 LIBS = -lwiringPi -lm -lpthread
-DEPS = 
+DEPS = motorController.h
 OBJ = $(ROOTNAME)$(HW)$(FOPTION).o
 
 %.o: %.c $(DEPS)
