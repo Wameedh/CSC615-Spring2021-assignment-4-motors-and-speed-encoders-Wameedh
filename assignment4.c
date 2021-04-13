@@ -1,5 +1,5 @@
 /**************************************************************
-* Class: CSC-615-01 Spring 2020
+* Class: CSC-615-01 Spring 2021
 * Name: Wameedh Mohammed Ali
 * Student ID: 920678405
 * Github ID: wameedh
@@ -7,7 +7,9 @@
 *
 * File: assignment4.c
 *
-* Description: 
+* Description: Read the speed encoder sensor on a multi-thread, where there is a thread responsible
+* for reading the pin that is conecting to the speed encoder and providing a speed to the main program.
+* Then out put the output the power (PWM) being applied to the motor, angular speed and linear speed.
 *
 **************************************************************/
 #include "assignment4.h"
@@ -63,11 +65,8 @@ int main(void) {
      for ( i = 1; i < 100 ; i++)
     {
         // gradually increase speed to max
-        // if((i % 10) == 0)
-        //     printf("Motor speed %d \n", i);
-       
         runTheMotor(BACKWARD, i);
-         delay(100);
+        delay(100);
        
     }
     delay(5000); // five seconds delay
@@ -177,7 +176,6 @@ void *runSpeedSensor(void *ptr) {
     //this function is used in sensor thread to calcylate and display the PWM, angular speed and linear speed.
     while (speedSensorThreadFlag)
     {
-        // delay(1000); // print out the speed every one second
         double aSpeed = calculateAngularSpeed(pulseTiming(TIME_TO_MEASURE), TIME_TO_MEASURE);
         double speed = calculateSpeed(ENCODER_DIAMETER, aSpeed);
         printf("Power (PWM) being applied is: %d %\n", i);
