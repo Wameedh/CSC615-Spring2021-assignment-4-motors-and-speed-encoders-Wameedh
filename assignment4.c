@@ -12,7 +12,6 @@
 **************************************************************/
 #include "assignment4.h"
 
-
 int main(void) {
      pthread_t sensorThread_id;
 
@@ -179,7 +178,7 @@ void *runSpeedSensor(void *ptr) {
     while (speedSensorThreadFlag)
     {
         // delay(1000); // print out the speed every one second
-        double aSpeed = calculateAngularSpeed(readPulses(TIME_TO_MEASURE), TIME_TO_MEASURE);
+        double aSpeed = calculateAngularSpeed(pulseTiming(TIME_TO_MEASURE), TIME_TO_MEASURE);
         double speed = calculateSpeed(ENCODER_DIAMETER, aSpeed);
         printf("Power (PWM) being applied is: %d %\n", i);
         printf("The angular speed is: %f rad/sec\n", aSpeed);
@@ -201,7 +200,7 @@ double calculateSpeed(double diameter, double angularSpeed) {
     return (diameter / 2) * angularSpeed;
 }
 
-int readPulses(double time) {
+int pulseTiming(double time) {
     //reads the pulses that the speed sensor sees. 
     int count = 0;
     double start = millis();

@@ -67,9 +67,9 @@ void PCA9685_SetPWMFreq(UWORD freq);
 void runTheMotor(DIR dir, UWORD speed);
 void writeI2C(UBYTE reg, UBYTE value);
 UBYTE readI2C(UBYTE reg);
-int readPulses(double time);
+int pulseTiming(double time);
 double calculateAngularSpeed(int totalPulses, double time);
 double calculateSpeed(double diameter, double angularSpeed);
-void *useSpeedSensor(void *ptr);
+void *runSpeedSensor(void *ptr);
 
 #endif //MOTORCONTROLER_H_
