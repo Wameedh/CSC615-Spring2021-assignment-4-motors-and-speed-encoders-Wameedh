@@ -48,9 +48,10 @@ int main(void) {
     
     delay(5000); // five seconds delay
     printf("Motor started slowing down to 15%\n");
-    for (; i >= 15 ; i--)
+    for (; i > 15 ; i--)
     {
         // gradually decrease speed to 15%
+        delay(100);
         runTheMotor(FORWARD, i);
        
     }
@@ -60,7 +61,7 @@ int main(void) {
     
     delay(2000); // two seconds delay
     printf("Motor started running backward and gradually increase speed to max\n");
-     for ( i = 1; i <= 100 ; i++)
+     for ( i = 1; i < 100 ; i++)
     {
         // gradually increase speed to max
         // if((i % 10) == 0)
