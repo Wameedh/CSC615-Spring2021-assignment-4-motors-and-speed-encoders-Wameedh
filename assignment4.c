@@ -61,7 +61,7 @@ int main(void) {
     
     delay(2000); // two seconds delay
     printf("Motor started running backward and gradually increase speed to max\n");
-     for ( i = 0; i <= 100 ; i++)
+     for ( i = 0; i < 100 ; i++)
     {
         // gradually increase speed to max
         // if((i % 10) == 0)
@@ -188,7 +188,7 @@ void *useSpeedSensor(void *ptr) {
 
 double calculateAngularSpeed(int totalPulses, double time) {
     return (2.0 * PI * totalPulses) / (time * PULSES_PER_ROTATION);
-    
+
 }
 
 double calculateSpeed(double diameter, double angularSpeed) {
