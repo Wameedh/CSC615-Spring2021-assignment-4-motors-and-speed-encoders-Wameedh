@@ -60,6 +60,7 @@ typedef enum {
 
 int speedSensorThreadFlag = 1;
 int fd;
+volatile size_t i;
 // volatile double power = 0.0;
 // volatile double aSpeed = 0.0;
 // volatile double speed = 0.0;

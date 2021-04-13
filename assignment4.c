@@ -43,11 +43,12 @@ int main(void) {
          * gradually increase speed to max but in reverse
         */
     printf("Motor running forword!\n");
+    i = 100;
     runTheMotor(FORWARD, 100); // run the motor forward at max speed
     
     delay(5000); // five seconds delay
     printf("Motor started slowing down to 15%\n");
-    for (size_t i = 100; i >= 15 ; i--)
+    for (i = 100; i >= 15 ; i--)
     {
         // gradually decrease speed to 15%
         runTheMotor(FORWARD, i);
@@ -55,11 +56,12 @@ int main(void) {
     }
     delay(3000); // three second delay
     Motor_Stop();
+    i = 0;
     printf("Motor has stoped fully!\n");
     
     delay(2000); // two seconds delay
     printf("Motor started running backward and gradually increase speed to max\n");
-     for (size_t i = 0; i <= 100 ; i++)
+     for ( i = 0; i <= 100 ; i++)
     {
         // gradually increase speed to max
         // if((i % 10) == 0)
@@ -177,7 +179,7 @@ void *useSpeedSensor(void *ptr) {
         delay(1000); // print out the spped every one second
         double aSpeed = calculateAngularSpeed(readPulses(TIME_TO_MEASURE), TIME_TO_MEASURE);
         double speed = calculateSpeed(ENCODER_DIAMETER, aSpeed);
-        
+        printf("Power (PWM) being applied is: %d \n", i);
         printf("The angular speed is: %f rad/sec\n", aSpeed);
         printf("The linear speed is: %f cm/sec\n\n", speed);
     }
