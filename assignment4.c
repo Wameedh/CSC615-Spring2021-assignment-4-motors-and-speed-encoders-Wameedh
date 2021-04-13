@@ -43,7 +43,6 @@ int main(void) {
          * gradually increase speed to max but in reverse
         */
     printf("Motor running forword!\n");
-    i = 100;
     runTheMotor(FORWARD, 100); // run the motor forward at max speed
     
     delay(5000); // five seconds delay
@@ -56,7 +55,6 @@ int main(void) {
     }
     delay(3000); // three second delay
     Motor_Stop();
-    i = 0;
     printf("Motor has stoped fully!\n");
     
     delay(2000); // two seconds delay
