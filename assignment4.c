@@ -66,8 +66,9 @@ int main(void) {
         // gradually increase speed to max
         // if((i % 10) == 0)
         //     printf("Motor speed %d \n", i);
-        delay(100);
+       
         runTheMotor(BACKWARD, i);
+         delay(100);
        
     }
     delay(5000); // five seconds delay
