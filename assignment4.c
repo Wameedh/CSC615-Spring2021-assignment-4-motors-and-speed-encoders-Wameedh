@@ -188,6 +188,7 @@ void *useSpeedSensor(void *ptr) {
 
 double calculateAngularSpeed(int totalPulses, double time) {
     return (2.0 * PI * totalPulses) / (time * PULSES_PER_ROTATION);
+    
 }
 
 double calculateSpeed(double diameter, double angularSpeed) {
