@@ -43,11 +43,12 @@ int main(void) {
          * gradually increase speed to max but in reverse
         */
     printf("Motor running forword!\n");
-    runTheMotor(FORWARD, 100); // run the motor forward at max speed
+    i = 100;
+    runTheMotor(FORWARD, i); // run the motor forward at max speed
     
     delay(5000); // five seconds delay
     printf("Motor started slowing down to 15%\n");
-    for (i = 100; i >= 15 ; i--)
+    for (; i >= 15 ; i--)
     {
         // gradually decrease speed to 15%
         runTheMotor(FORWARD, i);
@@ -59,12 +60,12 @@ int main(void) {
     
     delay(2000); // two seconds delay
     printf("Motor started running backward and gradually increase speed to max\n");
-     for ( i = 0; i < 100 ; i++)
+     for ( i = 1; i <= 100 ; i++)
     {
         // gradually increase speed to max
         // if((i % 10) == 0)
         //     printf("Motor speed %d \n", i);
-        //delay(100);
+        delay(100);
         runTheMotor(BACKWARD, i);
        
     }
