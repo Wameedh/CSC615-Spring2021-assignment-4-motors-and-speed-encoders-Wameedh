@@ -10,7 +10,7 @@
 * Description: 
 *
 **************************************************************/
-#include "motorController.h"
+#include "assignment4.h"
 
 
 int main(void) {
@@ -28,7 +28,7 @@ int main(void) {
     // set the freq 
     PCA9685_SetPWMFreq(100);
 
-    pthread_create(&sensorThread_id, NULL, useSpeedSensor,NULL);
+    pthread_create(&sensorThread_id, NULL, runSpeedSensor,NULL);
 
     printf("Press Button to start...\n");
     while (digitalRead(BUTTON_PIN) == LOW)
@@ -174,14 +174,14 @@ void PCA9685_SetPWMFreq(UWORD freq)
     writeI2C(MODE1, oldmode | 0x80);  //  This sets the MODE1 register to turn on auto increment.
 }
 
-
-void *useSpeedSensor(void *ptr) {
+void *runSpeedSensor(void *ptr) {
+    //this function is used in sensor thread to calcylate and display the PWM, angular speed and linear speed.
     while (speedSensorThreadFlag)
     {
-        // delay(1000); // print out the spped every one second
+        // delay(1000); // print out the speed every one second
         double aSpeed = calculateAngularSpeed(readPulses(TIME_TO_MEASURE), TIME_TO_MEASURE);
         double speed = calculateSpeed(ENCODER_DIAMETER, aSpeed);
-        printf("Power (PWM) being applied is: %d \n", i);
+        printf("Power (PWM) being applied is: %d %\n", i);
         printf("The angular speed is: %f rad/sec\n", aSpeed);
         printf("The linear speed is: %f cm/sec\n\n", speed);
     }
@@ -189,19 +189,23 @@ void *useSpeedSensor(void *ptr) {
 }
 
 double calculateAngularSpeed(int totalPulses, double time) {
+    //calculates and returns angular speed using
+    //Speed in radians per second.
     return (2.0 * PI * totalPulses) / (time * PULSES_PER_ROTATION);
 
 }
 
 double calculateSpeed(double diameter, double angularSpeed) {
+    //calculates and returns the linear speed using formula v = ωr.
+    // Speed in centimeters per second.
     return (diameter / 2) * angularSpeed;
 }
 
 int readPulses(double time) {
+    //reads the pulses that the speed sensor sees. 
     int count = 0;
     double start = millis();
     double end = start + (1000 * time);
-    // printf("start: %f, end: %f\n", start, end);
 
     while (end > millis()) {
         if(digitalRead(SPEED_SENSOR_PIN)) {
@@ -209,13 +213,6 @@ int readPulses(double time) {
             while(digitalRead(SPEED_SENSOR_PIN)){}
         }
     }
-    // printf("Total count: %d\n", count);
 
-    return count;
-}
-
-// void printOutInfo(){
-//     printf("Power (PWM) being applied is: %f\n", power);
-//     printf("The angular speed is: %f rad/sec\n", aSpeed);
-//     printf("The linear speed is: %f cm/sec\n\n", speed);
-// }
+    return count; // returns the number of pulses per 'time'.
+} 
