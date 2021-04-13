@@ -25,7 +25,7 @@
 #define PI                    3.14159265358979323846  //the value of pi
 #define NUMBER_OF_MOTORS      2                       //This defines the number of motors being used.
 #define PULSES_PER_ROTATION   20                      //The number of holes in the wheel encoder. The speed sensor reads each hole as a pulse.
-#define TIME_TO_MEASURE       2.0  
+#define TIME_TO_MEASURE       0.25  
 #define ENCODER_DIAMETER      2.575                     //in centimeters.
 
 #define HIGH    1
