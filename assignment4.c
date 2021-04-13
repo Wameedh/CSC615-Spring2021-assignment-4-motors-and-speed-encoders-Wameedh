@@ -66,7 +66,7 @@ int main(void) {
         // gradually increase speed to max
         // if((i % 10) == 0)
         //     printf("Motor speed %d \n", i);
-        delay(100);
+        //delay(100);
         runTheMotor(BACKWARD, i);
        
     }
@@ -177,7 +177,7 @@ void PCA9685_SetPWMFreq(UWORD freq)
 void *useSpeedSensor(void *ptr) {
     while (speedSensorThreadFlag)
     {
-        delay(1000); // print out the spped every one second
+        // delay(1000); // print out the spped every one second
         double aSpeed = calculateAngularSpeed(readPulses(TIME_TO_MEASURE), TIME_TO_MEASURE);
         double speed = calculateSpeed(ENCODER_DIAMETER, aSpeed);
         printf("Power (PWM) being applied is: %d \n", i);
